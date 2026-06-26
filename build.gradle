@@ -3,8 +3,12 @@ plugins {
     id 'maven-publish'
 }
 
-version = project.mod_version
+version = (project.property("mod_version") as String + "+" + project.property("minecraft_version") as String)
 group = project.maven_group
+
+base {
+    archivesName.set(project.property("archives_base_name") as String)
+}
 
 repositories {
     // Add repositories to retrieve artifacts from in here.
