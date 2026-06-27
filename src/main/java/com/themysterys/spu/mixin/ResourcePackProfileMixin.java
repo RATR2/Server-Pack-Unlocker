@@ -6,7 +6,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(Pack.class)
-public class ResourcePackProfileMixin {
+public abstract class ResourcePackProfileMixin {
 
     @ModifyReturnValue(method = "isFixedPosition", at = @At("RETURN"))
     private boolean isFixedPosition(boolean original) {
