@@ -16,10 +16,20 @@ public class PackPositionMixin {
 
     @Inject(method = "insert", at = @At("HEAD"), cancellable = true)
     public <T> void insert(List<T> items, T item, Function<T, PackSelectionConfig> profileGetter, boolean listInverted, CallbackInfoReturnable<Integer> cir) {
-        Pack pack = (Pack)item;
-        if (pack.getPackSource() == PackSource.SERVER) {
-            items.add(items.size() - 1, item);
-            cir.setReturnValue(items.size() - 1);
+        int i;
+        if (((Pack) item).getPackSource() == PackSource.SERVER) {
+            for (i = 0; i < items.size(); i++) {
+                Pack pack = (Pack) items.get(i);
+                System.out.println("[SPU] Pack Item:" + pack.getId());
+                System.out.println("[SPU] Pack Pos:" + pack.getDefaultPosition());
+                System.out.println("[SPU] i:" + i);
+                if (!pack.isFixedPosition() || pack.getDefaultPosition() != Pack.Position.TOP) {
+                    break;
+                }
+            }
+            i += 1;
+            items.add(i, item);
+            cir.setReturnValue(i);
         }
     }
 }
