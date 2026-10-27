@@ -11,6 +11,9 @@ public final class PackSpot {
     public List<String> above = new ArrayList<>();
     public List<String> below = new ArrayList<>();
     public boolean bottom;
+    public String name;
+    public String sha;
+
     public static PackSpot around(List<String> keys, int row, int fixedBottom) {
         PackSpot spot = new PackSpot();
         spot.bottom = keys.size() - 1 - row <= fixedBottom;
@@ -47,11 +50,11 @@ public final class PackSpot {
 
     @Override
     public boolean equals(Object other) {
-        return other instanceof PackSpot spot && bottom == spot.bottom && above.equals(spot.above) && below.equals(spot.below);
+        return other instanceof PackSpot spot && bottom == spot.bottom && Objects.equals(name, spot.name) && Objects.equals(sha, spot.sha) && above.equals(spot.above) && below.equals(spot.below);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(above, below, bottom);
+        return Objects.hash(above, below, bottom, name, sha);
     }
 }

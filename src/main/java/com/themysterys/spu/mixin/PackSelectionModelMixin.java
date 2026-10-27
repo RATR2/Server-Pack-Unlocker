@@ -35,7 +35,7 @@ public abstract class PackSelectionModelMixin {
         for (int row = 0; row < selected.size(); row++) {
             Pack pack = selected.get(row);
             if (pack.getPackSource() == PackSource.SERVER) {
-                PackPlacement.remember(pack, PackSpot.around(keys, row, fixedBottom));
+                PackPlacement.remember(pack, PackSpot.around(keys, row, fixedBottom), keys);
             }
         }
     }
